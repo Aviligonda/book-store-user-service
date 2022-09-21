@@ -33,4 +33,6 @@ public interface IUserService {
     Response sendOTP(String token);
 
     Response verifyOTP(String token, Long otp);
+
+    Response purchaseSubscription(String token);
 }

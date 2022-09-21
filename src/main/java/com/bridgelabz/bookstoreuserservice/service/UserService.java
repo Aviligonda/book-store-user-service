@@ -11,6 +11,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -251,6 +254,29 @@ public class UserService implements IUserService {
                 return new Response(200, "Success", isUserPresent.get());
             }
             throw new UserException(400, "OTP is Wrong");
+        }
+        throw new UserException(400, "Token is Wrong");
+    }
+    /**
+     * Purpose : Implement the Logic of Subscription Date and Expire Date
+     *
+     * @author : Aviligonda Sreenivasulu
+     * @Param :  token and id
+     */
+    @Override
+    public Response purchaseSubscription(String token) {
+        Long userId = tokenUtil.decodeToken(token);
+        Optional<UserServiceModel> isUserPresent = userServiceRepository.findById(userId);
+        if (isUserPresent.isPresent()) {
+            isUserPresent.get().setPurchaseDate(new Date());
+            Date date = new Date();
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(date);
+            calendar.add(Calendar.MONTH, 12);
+            Date expireDate = calendar.getTime();
+            isUserPresent.get().setExpireDate(expireDate);
+            userServiceRepository.save(isUserPresent.get());
+            return new Response(200, "Success", isUserPresent.get());
         }
         throw new UserException(400, "Token is Wrong");
     }

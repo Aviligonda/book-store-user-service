@@ -148,4 +148,16 @@ public class UserServiceController {
         Response response = userService.verifyOTP(token, otp);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
+    /**
+     * Purpose : Purchase Subscription
+     *
+     * @author :Aviligonda Sreenivasulu
+     * @Param : token
+     */
+    @PutMapping("/purchaseSubscription")
+    public ResponseEntity<Response> purchaseSubscription(@RequestHeader String token) {
+        Response response = userService.purchaseSubscription(token);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 }
