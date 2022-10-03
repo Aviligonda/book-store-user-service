@@ -4,6 +4,8 @@ import com.bridgelabz.bookstoreuserservice.dto.UserServiceDTO;
 import com.bridgelabz.bookstoreuserservice.exception.UserException;
 import com.bridgelabz.bookstoreuserservice.model.UserServiceModel;
 import com.bridgelabz.bookstoreuserservice.repository.UserServiceRepository;
+//import com.bridgelabz.bookstoreuserservice.util.Email;
+//import com.bridgelabz.bookstoreuserservice.util.MessageProducer;
 import com.bridgelabz.bookstoreuserservice.util.Response;
 import com.bridgelabz.bookstoreuserservice.util.TokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,9 +57,9 @@ public class UserService implements IUserService {
         userServiceModel.setVerify(false);
         userServiceRepository.save(userServiceModel);
         String userId = tokenUtil.createToken(userServiceModel.getId());
-//        String url="http://localhost:8080/userService/userVerification/"+userId;
-        String body = "User Added Successfully with user id is :" + userServiceModel.getId();
-//                +"\n Click this Link to verify the User "+url;
+        String url="http://localhost:8080/userService/userVerification/"+userId;
+        String body = "User Added Successfully with user id is :" + userServiceModel.getId()+
+                "\n Click this Link to verify the User "+url;
         String subject = "User Registration Successfully";
         mailService.send(userServiceModel.getEmailId(), body, subject);
 //        email.setTo(userServiceDTO.getEmailId());

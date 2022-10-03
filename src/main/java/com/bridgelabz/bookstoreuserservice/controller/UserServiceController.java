@@ -19,10 +19,14 @@ import java.util.List;
  * @author : Aviligonda Sreenivasulu
  */
 @RestController
-@RequestMapping("userService")
+@RequestMapping("/userService")
 public class UserServiceController {
     @Autowired
     IUserService userService;
+    @GetMapping("/hello")
+    public String hello(){
+        return "Hello Srinivas";
+    }
 
     /**
      * Purpose : User Details Create
@@ -31,7 +35,7 @@ public class UserServiceController {
      * @Param : userServiceDTO
      */
     @PostMapping("/create")
-    public ResponseEntity<Response> creatingUser(@Valid @RequestBody UserServiceDTO userServiceDTO) {
+    public ResponseEntity<Response> creatingUser( @RequestBody UserServiceDTO userServiceDTO) {
         Response response = userService.createUser(userServiceDTO);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

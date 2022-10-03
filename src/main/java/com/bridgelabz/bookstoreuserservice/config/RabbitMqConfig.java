@@ -1,6 +1,7 @@
 //package com.bridgelabz.bookstoreuserservice.config;
 //
 //import org.springframework.amqp.core.*;
+//import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 //import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 //import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
 //import org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter;
@@ -50,5 +51,14 @@
 //    @Bean
 //    MessageListenerAdapter myQueueListener(MessageListener listener) {
 //        return new MessageListenerAdapter(listener, "onMessage");
+//    }
+//    @Bean
+//    public ConnectionFactory connectionFactory() {
+//        CachingConnectionFactory connectionFactory = new CachingConnectionFactory();
+//        connectionFactory.setHost("127.0.0.1");
+//        connectionFactory.setVirtualHost("127.0.0.1");
+//        connectionFactory.setUsername("guest");
+//        connectionFactory.setPassword("guest");
+//        return connectionFactory;
 //    }
 //}
